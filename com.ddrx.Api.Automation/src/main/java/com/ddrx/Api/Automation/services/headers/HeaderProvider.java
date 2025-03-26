@@ -11,10 +11,13 @@ public class HeaderProvider {
 	private static HashMap<String, String> headers = new HashMap<>();
 
 	public static Map<String, String> SystemHeaders(String username, String password) {
-
+		
+		
+		System.out.println("username passed in header provider is:" + username + "password passed in header provider is:" + password);
 		headers.put(Headerkeys.CONTENT_Type, "application/json");
-		headers.put(Headerkeys.SESSION_ID, Authservice.jsessionid());
+		
 		headers.put(Headerkeys.Api_key, loginservice.api("username", "password"));
+		//headers.put(Headerkeys.Cookie, Authservice.jsessionid());
 		return headers;
 	}
 

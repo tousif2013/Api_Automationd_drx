@@ -80,7 +80,7 @@ public final class Authservice {
 			byte[] encryptedBytes = cipher.doFinal(credentials.getBytes("UTF-8"));
 			encryptedString = Base64.getEncoder().encodeToString(encryptedBytes);
 
-			System.out.println("Encrypted String: " + encryptedString);
+			System.out.println("Encrypted String in Auth Serive : " + encryptedString);
 
 		} catch (Exception e) {
 			System.out.println("Error while encrypting: " + e.toString());

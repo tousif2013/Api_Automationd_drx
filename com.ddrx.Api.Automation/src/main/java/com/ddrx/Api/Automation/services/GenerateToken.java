@@ -12,6 +12,8 @@ public class GenerateToken {
 		Authservice auth = Authservice.getcreds(username, Password);
 		Response response = auth.fetchresponse();
 		Map<String, String> keyvalueMap = new HashMap<>();
+		System.out.println("genratedtoken :generate token class :--->"+ auth.getToken(response));
+		System.out.println("jsessioniid :generate token class :--->"+ response.cookie("JSESSIONID"));
 		keyvalueMap.put("genratedtoken", auth.getToken(response));
 		keyvalueMap.put("jsessioniid", response.cookie("JSESSIONID"));
 

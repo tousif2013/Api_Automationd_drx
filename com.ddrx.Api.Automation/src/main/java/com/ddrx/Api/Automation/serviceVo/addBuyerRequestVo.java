@@ -5,10 +5,14 @@ import java.util.List;
 import com.ddrx.Api.Automation.commons.MockUpData;
 import com.ddrx.Api.Automation.serviceVo.userDetailsVo.UserDetailsVo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @lombok.Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class addBuyerRequestVo {
 
 	@MockUpData(type = "")
@@ -96,10 +100,8 @@ public class addBuyerRequestVo {
 	@MockUpData(type = "userDetails")
 	private List<UserDetailsVo> userDetails;
 
-	
-	
+	public   String getcompanyName() {
+		return companyName;
+	}
 
-	
-
-	
 }

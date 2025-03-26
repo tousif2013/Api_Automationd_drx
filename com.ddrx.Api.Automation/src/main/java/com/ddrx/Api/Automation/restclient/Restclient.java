@@ -77,8 +77,10 @@ public final class Restclient {
 	}
 
 	public Response endpoint(Protocols post, com.ddrx.Api.Automation.util.endpoint loginPath) {
+		this.requestSpecification.log().all();
 		Response response = RestAssured.given(this.requestSpecification, this.responseSpecification)
 				.request(post.name(), loginPath.getEndPoint());
+		response.then().log().all();
 
 		return response;
 	}
@@ -87,43 +89,15 @@ public final class Restclient {
 		RestAssured.baseURI = Config_Factory.getEnvironmentConfig().getbaseurl();
 		Response response = RestAssured.given().when().get().then().extract().response();
 		return response;
-
 	}
 
-	public Restclient requestBody(Class<?> clazz) {
-
-		Object object = null;
-		try {
-			object = clazz.getDeclaredConstructor().newInstance();
-		} catch (InstantiationException e) {
-			System.out.println("Execpetion Occurred during Instance creeation of clazzVo");
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			System.out.println(
-					"Execpetion Occurred during Instance creeation of clazzVo beacuse of illeagalAccess Exception");
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			System.out.println(
-					"Execpetion Occurred during Instance creeation of clazzVo beacuse of IllegalArgument Exception");
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			System.out.println(
-					"Execpetion Occurred during Instance creeation of clazzVo beacuse of InvocationTargetException Exception");
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			System.out.println(
-					"Execpetion Occurred during Instance creeation of clazzVo beacuse of NoSuchMethodException Exception");
-
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			System.out.println(
-					"Execpetion Occurred during Instance creeation of clazzVo beacuse of SecurityException Exception");
-			e.printStackTrace();
+	public Restclient requestBody(Object object) {
+		if (this.requestSpecification == null) {
+			throw new IllegalStateException("RequestSpecification is not initialized.");
 		}
 
-		if (this.requestSpecification == null) {
-			throw new IllegalStateException("RequestSpecification is not initailized ");
-
+		if (object == null) {
+			throw new IllegalArgumentException("Object cannot be null.");
 		}
 
 		this.requestSpecification = this.requestSpecification.body(object);
